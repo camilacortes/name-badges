@@ -1,0 +1,18 @@
+body {
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.badge-border {
+  /* display: flex;
+  justify-content: center; */
+  border: solid black;
+  border-radius: 10px;
+  height: 386px;
+  width: 900px;
+}
+
+.new-input {
+}

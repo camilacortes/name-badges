@@ -3,10 +3,10 @@ import InputBadge from './components/InputBadge'
 import FinalBadge from './components/FinalBadge'
 
 
+
 function App() {
   return (
-    <div>
-      app component
+    <div class="container">
       <InputBadge/>
       <FinalBadge/>
     </div>

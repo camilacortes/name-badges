@@ -8,7 +8,6 @@ class FinalBadge extends React.Component{
   render(){
     return(
       <div>
-        final badge component
       </div>
     )
   }
