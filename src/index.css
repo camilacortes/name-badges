@@ -6,13 +6,34 @@ body {
   justify-content: center;
 }
 .badge-border {
-  /* display: flex;
-  justify-content: center; */
   border: solid black;
   border-radius: 10px;
-  height: 386px;
-  width: 900px;
+  height: 369px;
+  width: 415px;
+  padding: 22px;
 }
 
 .new-input {
+  margin: 17px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.textarea-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+textarea {
+  height: 154px;
+  width: 273px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
