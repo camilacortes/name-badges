@@ -1,4 +1,5 @@
 import React from 'react';
+import FinalBadge from './FinalBadge'
 
 class InputBadge extends React.Component{
   constructor(){
@@ -15,6 +16,8 @@ class InputBadge extends React.Component{
     this.handleChange = this.handleChange.bind(this)
     this.validateNames = this.validateNames.bind(this)
     this.submitForm = this.submitForm.bind(this)
+    this.validateNum = this.validateNum.bind(this);
+    this.renderFinalBadge = this.renderFinalBadge.bind(this);
   }
 
   handleChange(e){
@@ -22,7 +25,6 @@ class InputBadge extends React.Component{
     this.setState({
       [name] : value
     })
-    // console.log(value);
   }
 
   validateNames(){
@@ -31,25 +33,50 @@ class InputBadge extends React.Component{
     const inputReg = /[a-zA-Z][a-zA-Z0-9-_.]{3}/
     const firstNameTest = inputReg.test(this.state.firstName)
     const lastNameTest = inputReg.test(this.state.lastName)
-    // const emailTest = inputReg.test(this.state.email)
-    // const birthPlaceTest = inputReg.test(this.state.birthPlace)
-    // const faveFoodTest = inputReg.test(this.state.faveFood)
-    // const aboutTest = inputReg.test(this.state.about)
-
-    if(firstNameTest === false || lastNameTest === false){
+    const emailTest = inputReg.test(this.state.email)
+    const birthPlaceTest = inputReg.test(this.state.birthPlace)
+    const faveFoodTest = inputReg.test(this.state.faveFood)
+    const aboutTest = inputReg.test(this.state.about)
+    if(firstNameTest === false || lastNameTest === false ||
+      emailTest === false || birthPlaceTest === false ||
+      faveFoodTest === false || aboutTest === false){
       return alert('min three characters')
-    } else {
+    } else {}
+  }
 
-    }
+  validateNum(){
+    const validation = /[0-9][*|\":<>[\]{}`\\()';@&$-]/g;
+    const phoneTest = validation.test(this.state.phone);
+    if(phoneTest === true){
+      alert('No special characters in phone number!')
+    }else{}
+  }
+
+ 
+  renderFinalBadge(props){
+      return <FinalBadge 
+      firstName={this.state.firstName}
+      lastName={this.state.lastName}
+      email={this.state.email}
+      birthPlace={this.state.birthPlace}
+      faveFood={this.state.faveFood}
+      about={this.state.about}/> 
   }
 
   submitForm(e){
     e.preventDefault()
     this.validateNames()
+    this.validateNum()
+    this.renderFinalBadge();
+    console.log('submittted')
   }
+
+ 
 
   render(){
     return(
+      <>
+      
       <div className="badge-border">
         <form onSubmit={this.submitForm}>
           <input
@@ -100,7 +127,7 @@ class InputBadge extends React.Component{
           </div>
         </form>
         </div>
-   
+        </>
     )
   }
 }

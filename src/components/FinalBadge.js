@@ -1,16 +1,14 @@
 import React from 'react';
 
-class FinalBadge extends React.Component{
-  constructor(){
-    super()
-  }
+function FinalBadge(props){
 
-  render(){
     return(
-      <div>
+      <div className="final-badge-container">
+        <div className="final-badge-border">
+          {props.firstName}
+        </div>
       </div>
     )
-  }
 }
 
 export default FinalBadge

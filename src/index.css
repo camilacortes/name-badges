@@ -4,6 +4,7 @@ body {
 .container {
   display: flex;
   justify-content: center;
+  margin: 15px;
 }
 .badge-border {
   border: solid black;
@@ -36,4 +37,18 @@ textarea {
 .button-container {
   display: flex;
   justify-content: center;
+}
+
+.final-badge-container {
+  display: flex;
+  justify-content: center;
+}
+
+.final-badge-border {
+  border: solid black;
+  border-radius: 10px;
+  height: 369px;
+  width: 415px;
+  padding: 22px;
+  margin: 20px 0 0 0;
 }
