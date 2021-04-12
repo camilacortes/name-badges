@@ -11,13 +11,18 @@ class InputBadge extends React.Component{
       birthPlace: '',
       phone: '',
       faveFood: '',
-      about: ''
+      about: '',
+      badges: [
+        {
+          firstName: ''
+        }
+      ]
     }
     this.handleChange = this.handleChange.bind(this)
     this.validateNames = this.validateNames.bind(this)
     this.submitForm = this.submitForm.bind(this)
-    this.validateNum = this.validateNum.bind(this);
-    this.renderFinalBadge = this.renderFinalBadge.bind(this);
+    this.validateNum = this.validateNum.bind(this)
+    this.displayNewBadge = this.displayNewBadge.bind(this)
   }
 
   handleChange(e){
@@ -52,34 +57,61 @@ class InputBadge extends React.Component{
     }else{}
   }
 
- 
-  renderFinalBadge(props){
-      return <FinalBadge 
-      firstName={this.state.firstName}
-      lastName={this.state.lastName}
-      email={this.state.email}
-      birthPlace={this.state.birthPlace}
-      faveFood={this.state.faveFood}
-      about={this.state.about}/> 
-  }
-
   submitForm(e){
     e.preventDefault()
     this.validateNames()
     this.validateNum()
-    this.renderFinalBadge();
-    console.log('submittted')
+
+    this.setState((prevState) =>{
+      return {
+        firstName: '',
+        lastName: '',
+        email: '',
+        birthPlace: '',
+        phone: '',
+        faveFood: '',
+        about: '',
+        badges:  [ 
+          {
+            firstName: prevState.firstName,
+            lastName: prevState.lastName,
+            email: prevState.email,
+            birthPlace: prevState.birthPlace,
+            phone: prevState.phone,
+            faveFood: prevState.faveFood,
+            about: prevState.about
+          }
+        ]
+      }
+    })
+   
   }
 
+  displayNewBadge(e){
+    e.preventDefault();
+    console.log('clicked')
+   return <FinalBadge badges={this.state.badges} firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} birthPlace={this.state.birthPlace} phone={this.state.phone} faveFood={this.state.faveFood} about={this.state.about}/>
+  }
  
 
   render(){
+    // disabling submit button 
+    const{firstName, lastName, email, birthPlace, phone, faveFood, about} = this.state;
+    const isEnabled = 
+    firstName.length > 0 && 
+    lastName.length > 0 &&
+    email.length > 0 &&
+    birthPlace.length > 0 &&
+    phone.length > 0 &&
+    faveFood.length > 0 &&
+    about.length > 0 ;
+
     return(
       <>
-      
       <div className="badge-border">
         <form onSubmit={this.submitForm}>
           <input
+          onChange={this.disableButton}
            name="firstName"
           value={this.state.firstName}
           placeholder="First Name"
@@ -123,16 +155,18 @@ class InputBadge extends React.Component{
           name="about"></textarea>
           </div>
           <div className="button-container">
-          <button>Submit</button>
+          <button 
+          disabled={!isEnabled} 
+          className="button"
+          onClick={this.displayNewBadge}>Submit</button>
           </div>
         </form>
+        {/* <FinalBadge badges={this.state.badges} firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} birthPlace={this.state.birthPlace} phone={this.state.phone} faveFood={this.state.faveFood} about={this.state.about}/> */}
+
         </div>
-        </>
+      </>
     )
   }
 }
 
 export default InputBadge
-
-// 1 make html and css for the boxes 
-// 2 fix input values etc. 

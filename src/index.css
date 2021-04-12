@@ -1,4 +1,5 @@
 body {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
@@ -16,11 +17,6 @@ body {
 
 .new-input {
   margin: 17px;
-}
-
-.input-container {
-  display: flex;
-  justify-content: space-around;
 }
 
 .textarea-container {
@@ -48,7 +44,16 @@ textarea {
   border: solid black;
   border-radius: 10px;
   height: 369px;
-  width: 415px;
-  padding: 22px;
+  width: 499px;
   margin: 20px 0 0 0;
+}
+
+p {
+  margin: 20px;
+}
+
+.badge-header {
+  background-color: grey;
+  height: 19px;
+  padding: 10px;
 }
