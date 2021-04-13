@@ -1,32 +1,19 @@
-import React from 'react';
+import React from 'react'
 
-function FinalBadge(props){
-  const badgesLoop = props.badges.map(item =>{
-   return (
-     <>
-     <div className="badge-header">Badge: </div>
-     <div className="badge-contents">
-       
-      <p> First Name: {item.firstName}</p>
-      <p> Last Name: {item.lastName}</p>
-      <p> Email : {item.email}</p>
-      <p> Birthplace: {item.birthPlace}</p>
-      <p> Phone: {item.phone}</p>
-      <p> Favorite Food: {item.faveFood}</p>
-      <p className="new-about"> About: {item.about}</p>
-    </div>
-    </>
-   )
-  })
-    return(
-      
+export default function FinalBadge(props) {
+  return (
+    <div className="final-badge-container">
+      <div className="final-badge-border">
+        <div className="badge-header">Badge: </div>
+      <p> Name: {props.firstName} {props.lastName}</p>
+      <p> Email: {props.email}</p>
+      <p>Place of Birth: {props.birthPlace}</p>
+      <p>Phone: {props.phone}</p>
+      <p>Favorite Food: {props.faveFood}</p>
+      <p>About Me: {props.about}</p>
 
-      <div className="final-badge-container">
-        <div className="final-badge-border">
-         {badgesLoop}
-        </div>
       </div>
-    )
+    </div>
+  )
 }
 
-export default FinalBadge

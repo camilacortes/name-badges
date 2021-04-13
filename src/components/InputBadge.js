@@ -12,56 +12,39 @@ class InputBadge extends React.Component{
       phone: '',
       faveFood: '',
       about: '',
-      badges: [
-        {
-          firstName: ''
-        }
-      ]
+      badges: [],
+      showForm: false
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.validateNames = this.validateNames.bind(this)
-    this.submitForm = this.submitForm.bind(this)
-    this.validateNum = this.validateNum.bind(this)
-    this.displayNewBadge = this.displayNewBadge.bind(this)
   }
 
-  handleChange(e){
+  handleChange =(e)=>{
     const {name, value} = e.target 
     this.setState({
       [name] : value
     })
   }
 
-  validateNames(){
-    // figure out a way to make this more DRY 
-
-    const inputReg = /[a-zA-Z][a-zA-Z0-9-_.]{3}/
-    const firstNameTest = inputReg.test(this.state.firstName)
-    const lastNameTest = inputReg.test(this.state.lastName)
-    const emailTest = inputReg.test(this.state.email)
-    const birthPlaceTest = inputReg.test(this.state.birthPlace)
-    const faveFoodTest = inputReg.test(this.state.faveFood)
-    const aboutTest = inputReg.test(this.state.about)
-    if(firstNameTest === false || lastNameTest === false ||
-      emailTest === false || birthPlaceTest === false ||
-      faveFoodTest === false || aboutTest === false){
-      return alert('min three characters')
-    } else {}
-  }
-
-  validateNum(){
-    const validation = /[0-9][*|\":<>[\]{}`\\()';@&$-]/g;
-    const phoneTest = validation.test(this.state.phone);
-    if(phoneTest === true){
-      alert('No special characters in phone number!')
-    }else{}
-  }
-
-  submitForm(e){
+  submitForm=(e)=>{
     e.preventDefault()
-    this.validateNames()
-    this.validateNum()
-
+    // character validation
+    const inputs = [
+      this.state.firstName,
+      this.state.lastName,
+      this.state.phone,
+      this.state.email,
+      this.state.faveFood,
+      this.state.birthPlace,
+      this.state.about
+    ]
+       inputs.map(item =>{
+          if(item.length <= 3){
+            alert('Fields need at least 3 characters')
+          }})
+    
+    // phone validation
+    if(isNaN(this.state.phone)){
+      alert('Phone needs to be numbers and no special characters!')
+    } else{
     this.setState((prevState) =>{
       return {
         firstName: '',
@@ -71,7 +54,7 @@ class InputBadge extends React.Component{
         phone: '',
         faveFood: '',
         about: '',
-        badges:  [ 
+        badges:  [ ...prevState.badges,
           {
             firstName: prevState.firstName,
             lastName: prevState.lastName,
@@ -81,18 +64,13 @@ class InputBadge extends React.Component{
             faveFood: prevState.faveFood,
             about: prevState.about
           }
-        ]
+        ],
+      
       }
     })
-   
+  }
   }
 
-  displayNewBadge(e){
-    e.preventDefault();
-    console.log('clicked')
-   return <FinalBadge badges={this.state.badges} firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} birthPlace={this.state.birthPlace} phone={this.state.phone} faveFood={this.state.faveFood} about={this.state.about}/>
-  }
- 
 
   render(){
     // disabling submit button 
@@ -106,10 +84,23 @@ class InputBadge extends React.Component{
     faveFood.length > 0 &&
     about.length > 0 ;
 
+    const myMappedBadge = this.state.badges.map(item =>{
+      return <FinalBadge 
+      key={item.firstName}
+      firstName={item.firstName}
+      lastName={item.lastName} 
+      email={item.email} 
+      birthPlace={item.birthPlace}
+      phone={item.phone} 
+      faveFood={item.faveFood} 
+      about={item.about}/>
+    })
+
     return(
       <>
       <div className="badge-border">
-        <form onSubmit={this.submitForm}>
+        <form onSubmit={this.submitForm}
+        name="form">
           <input
           onChange={this.disableButton}
            name="firstName"
@@ -155,14 +146,11 @@ class InputBadge extends React.Component{
           name="about"></textarea>
           </div>
           <div className="button-container">
-          <button 
-          disabled={!isEnabled} 
-          className="button"
-          onClick={this.displayNewBadge}>Submit</button>
+          <button className="button"
+          disabled={!isEnabled}>Submit</button>
           </div>
         </form>
-        {/* <FinalBadge badges={this.state.badges} firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} birthPlace={this.state.birthPlace} phone={this.state.phone} faveFood={this.state.faveFood} about={this.state.about}/> */}
-
+        {myMappedBadge}
         </div>
       </>
     )
